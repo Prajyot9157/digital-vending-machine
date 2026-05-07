@@ -34,7 +34,6 @@
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 antialiased overflow-x-hidden">
 
-    <!-- Background Blobs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-200/40 mix-blend-multiply filter blur-[100px] opacity-70"></div>
         <div class="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-cyan-200/40 mix-blend-multiply filter blur-[100px] opacity-70"></div>
@@ -54,7 +53,7 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                Machine Online
+                Online
             </div>
         </div>
     </header>
@@ -75,353 +74,276 @@
             <div class="flex-1 h-[2px] bg-slate-200 mx-2 mb-4" id="line-2"></div>
             <div class="flex flex-col items-center gap-1">
                 <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all" id="step-3-dot">3</div>
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter" id="step-3-label">Refill</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter" id="step-3-label">Fill</span>
             </div>
         </div>
 
         <!-- SECTION 1: SELECTION -->
-        <div id="selection-screen" class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div class="text-left space-y-2">
-                <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Get Clean Water</h1>
-                <p class="text-slate-500 font-medium">Please select your container size to begin.</p>
+        <div id="selection-screen" class="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div class="text-left space-y-1">
+                <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">How much water?</h1>
+                <p class="text-slate-500 font-medium">Choose a size or enter your own.</p>
             </div>
 
-            <!-- INSTRUCTION CARD -->
-            <div class="bg-blue-600 rounded-3xl p-5 text-white shadow-xl shadow-blue-500/20 relative overflow-hidden group">
-                <div class="absolute -right-6 -bottom-6 opacity-20 group-hover:scale-110 transition-transform">
-                    <i data-lucide="info" class="w-24 h-24"></i>
-                </div>
-                <div class="relative z-10 flex items-center gap-4">
-                    <div class="bg-white/20 p-3 rounded-2xl">
-                        <i data-lucide="hand" class="w-6 h-6"></i>
+            <div class="space-y-3" id="plans-container">
+                <!-- Custom Trigger -->
+                <div onclick="openManualEntry()" class="plan-card p-4 rounded-2xl cursor-pointer bg-white border-2 border-dashed border-slate-200 hover:border-blue-400 flex items-center gap-4 transition-all" id="plan-manual">
+                    <div class="p-3 rounded-xl bg-slate-50 text-slate-400">
+                        <i data-lucide="keyboard" class="w-5 h-5"></i>
                     </div>
-                    <div>
-                        <p class="text-xs font-bold uppercase tracking-widest opacity-80">Quick Tip</p>
-                        <p class="font-semibold leading-tight">Place your bottle in the nozzle area before paying.</p>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-slate-700">Custom Volume</h3>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Type any amount</p>
                     </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
                 </div>
-            </div>
 
-            <div class="space-y-4" id="plans-container">
-                <!-- 1 Litre Plan -->
-                <div onclick="selectPlan('small', 1, 1)" class="plan-card relative p-5 rounded-3xl cursor-pointer transition-all duration-300 bg-white border border-slate-100 hover:border-blue-200 card-shadow group" id="plan-small">
+                <!-- Presets -->
+                <div onclick="selectPlan('small', 1, 1)" class="plan-card p-5 rounded-2xl cursor-pointer bg-white border border-slate-100 hover:border-blue-300 card-shadow group" id="plan-small">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="icon-box p-3.5 rounded-2xl bg-blue-50 text-blue-500 transition-colors">
+                            <div class="icon-box p-3 rounded-xl bg-blue-50 text-blue-500">
                                 <i data-lucide="glass-water" class="w-6 h-6"></i>
                             </div>
-                            <div>
-                                <h3 class="plan-title font-bold text-xl tracking-tight">1 Litre</h3>
-                                <p class="plan-desc text-sm font-medium text-slate-500">Individual Refill</p>
-                            </div>
+                            <h3 class="font-bold text-lg">1 Litre</h3>
                         </div>
-                        <div class="text-right">
-                            <div class="text-3xl font-black tracking-tighter flex items-start justify-end">
-                                <span class="text-sm mt-1 mr-0.5 opacity-50">₹</span>1
-                            </div>
-                        </div>
+                        <div class="text-2xl font-black text-slate-900 plan-price">₹1</div>
                     </div>
                 </div>
 
-                <!-- 5 Litre Plan -->
-                <div onclick="selectPlan('medium', 5, 5)" class="plan-card relative p-5 rounded-3xl cursor-pointer transition-all duration-300 bg-white border border-slate-100 hover:border-blue-200 card-shadow group" id="plan-medium">
+                <div onclick="selectPlan('medium', 5, 5)" class="plan-card p-5 rounded-2xl cursor-pointer bg-white border border-slate-100 hover:border-blue-300 card-shadow group" id="plan-medium">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="icon-box p-3.5 rounded-2xl bg-blue-50 text-blue-500 transition-colors">
+                            <div class="icon-box p-3 rounded-xl bg-blue-50 text-blue-500">
                                 <i data-lucide="cup-soda" class="w-6 h-6"></i>
                             </div>
-                            <div>
-                                <h3 class="plan-title font-bold text-xl tracking-tight">5 Litres</h3>
-                                <p class="plan-desc text-sm font-medium text-slate-500">Small Family Can</p>
-                            </div>
+                            <h3 class="font-bold text-lg">5 Litres</h3>
                         </div>
-                        <div class="text-right">
-                            <div class="text-3xl font-black tracking-tighter flex items-start justify-end">
-                                <span class="text-sm mt-1 mr-0.5 opacity-50">₹</span>5
-                            </div>
-                        </div>
+                        <div class="text-2xl font-black text-slate-900 plan-price">₹5</div>
                     </div>
                 </div>
 
-                <!-- 20 Litre Plan -->
-                <div onclick="selectPlan('large', 10, 20)" class="plan-card relative p-5 rounded-3xl cursor-pointer transition-all duration-300 bg-white border border-slate-100 hover:border-blue-200 card-shadow group" id="plan-large">
-                    <div class="absolute -top-3 right-5 text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1 bg-gradient-to-r from-amber-400 to-orange-400 text-white best-value-tag">
-                        <i data-lucide="sparkles" class="w-2.5 h-2.5 fill-current"></i> Save More
-                    </div>
+                <div onclick="selectPlan('large', 20, 20)" class="plan-card p-5 rounded-2xl cursor-pointer bg-white border border-slate-100 hover:border-blue-300 card-shadow group" id="plan-large">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="icon-box p-3.5 rounded-2xl bg-blue-50 text-blue-500 transition-colors">
+                            <div class="icon-box p-3 rounded-xl bg-blue-50 text-blue-500">
                                 <i data-lucide="container" class="w-6 h-6"></i>
                             </div>
-                            <div>
-                                <h3 class="plan-title font-bold text-xl tracking-tight">20 Litres</h3>
-                                <p class="plan-desc text-sm font-medium text-slate-500">Commercial Jar</p>
-                            </div>
+                            <h3 class="font-bold text-lg">20 Litres</h3>
                         </div>
-                        <div class="text-right">
-                            <div class="text-3xl font-black tracking-tighter flex items-start justify-end">
-                                <span class="text-sm mt-1 mr-0.5 opacity-50">₹</span>10
-                            </div>
-                        </div>
+                        <div class="text-2xl font-black text-slate-900 plan-price">₹20</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Payment Methods Trigger -->
-            <div id="payment-methods" class="hidden-section pt-4 animate-in slide-in-from-bottom-6 duration-500">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="h-px bg-slate-200 flex-1"></div>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Select Payment Way</span>
-                    <div class="h-px bg-slate-200 flex-1"></div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <button onclick="setPaymentMethod('qr')" class="group flex flex-col items-center justify-center gap-3 bg-white p-5 rounded-3xl card-shadow border border-slate-100 hover:border-blue-300 transition-all active:scale-[0.97]">
-                        <div class="bg-slate-50 group-hover:bg-blue-50 transition-colors p-4 rounded-2xl text-slate-600 group-hover:text-blue-500">
-                            <i data-lucide="qr-code" class="w-8 h-8"></i>
-                        </div>
-                        <span class="font-bold text-sm text-slate-700">QR Scanner</span>
-                    </button>
-                    <button onclick="setPaymentMethod('app')" class="group flex flex-col items-center justify-center gap-3 bg-white p-5 rounded-3xl card-shadow border border-slate-100 hover:border-blue-300 transition-all active:scale-[0.97]">
-                        <div class="bg-slate-50 group-hover:bg-blue-50 transition-colors p-4 rounded-2xl text-slate-600 group-hover:text-blue-500">
-                            <i data-lucide="smartphone" class="w-8 h-8"></i>
-                        </div>
-                        <span class="font-bold text-sm text-slate-700">UPI Apps</span>
-                    </button>
+            <!-- PAYMENT OPTIONS (Appears after any selection) -->
+            <div id="payment-choice-container" class="hidden-section pt-4 animate-in slide-in-from-bottom-6">
+                <div class="bg-blue-600 rounded-3xl p-6 text-white shadow-xl shadow-blue-200">
+                    <div class="mb-4 text-center">
+                        <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Selected Amount</p>
+                        <h2 class="text-3xl font-black">₹<span id="summary-amount">0</span></h2>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="setPaymentMethod('qr')" class="bg-white/10 hover:bg-white/20 p-4 rounded-2xl flex flex-col items-center gap-2 border border-white/20 transition-all">
+                            <i data-lucide="qr-code" class="w-6 h-6"></i>
+                            <span class="text-xs font-bold uppercase">Scan QR</span>
+                        </button>
+                        <button onclick="setPaymentMethod('app')" class="bg-white text-blue-600 p-4 rounded-2xl flex flex-col items-center gap-2 transition-all">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                            <span class="text-xs font-bold uppercase">UPI App</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 2: PAYMENT INTERFACE -->
-        <div id="payment-screen" class="hidden-section space-y-6 animate-in fade-in slide-in-from-right-8 duration-400">
-            <button onclick="backToSelection()" class="flex items-center gap-1.5 text-slate-500 hover:text-slate-900 font-semibold py-2 transition-colors w-fit group">
-                <div class="bg-white p-1 rounded-full shadow-sm border border-slate-100">
-                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                </div>
-                Go Back
+        <!-- MANUAL ENTRY SCREEN -->
+        <div id="manual-screen" class="hidden-section animate-in zoom-in-95 duration-300">
+            <button onclick="closeManualEntry()" class="flex items-center gap-2 text-slate-500 font-bold mb-6">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
             </button>
+            <div class="bg-white rounded-[2.5rem] p-8 card-shadow border border-slate-100 text-center space-y-6">
+                <h2 class="text-xl font-bold">Type Litres</h2>
+                <div class="relative">
+                    <input type="number" id="custom-volume-input" readonly class="w-full text-center text-6xl font-black text-blue-600 bg-transparent focus:outline-none">
+                    <p class="text-slate-300 font-bold">Litres (₹1 / L)</p>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="keypadInput(1)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">1</button>
+                    <button onclick="keypadInput(2)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">2</button>
+                    <button onclick="keypadInput(3)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">3</button>
+                    <button onclick="keypadInput(4)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">4</button>
+                    <button onclick="keypadInput(5)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">5</button>
+                    <button onclick="keypadInput(6)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">6</button>
+                    <button onclick="keypadInput(7)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">7</button>
+                    <button onclick="keypadInput(8)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">8</button>
+                    <button onclick="keypadInput(9)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl active:bg-blue-100 transition-all">9</button>
+                    <button onclick="keypadInput('clear')" class="p-4 bg-red-50 text-red-500 rounded-xl font-bold transition-all">C</button>
+                    <button onclick="keypadInput(0)" class="p-4 bg-slate-50 rounded-xl font-bold text-xl transition-all">0</button>
+                    <button onclick="keypadInput('back')" class="p-4 bg-slate-50 rounded-xl font-bold transition-all flex items-center justify-center"><i data-lucide="delete" class="w-5 h-5"></i></button>
+                </div>
+                <button onclick="confirmManualVolume()" class="w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-lg active:scale-95 transition-all">
+                    Set Amount
+                </button>
+            </div>
+        </div>
 
-            <div class="bg-white rounded-[2.5rem] p-8 card-shadow border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
-                
-                <div class="text-center space-y-1 mb-8">
-                    <div class="inline-flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4">
-                        <i data-lucide="credit-card" class="w-3 h-3"></i>
-                        Checkout
+        <!-- PAYMENT SCREEN -->
+        <div id="payment-screen" class="hidden-section space-y-6 animate-in slide-in-from-right-8">
+            <button onclick="backToSelection()" class="flex items-center gap-2 text-slate-500 font-bold">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+            </button>
+            <div class="bg-white rounded-[2.5rem] p-8 card-shadow border border-slate-100 text-center">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Total Payable</p>
+                <div class="text-5xl font-black text-slate-900 mb-8">₹<span id="display-amount">0</span></div>
+
+                <div id="qr-content" class="hidden-section flex flex-col items-center gap-6">
+                    <div class="bg-white p-4 rounded-3xl shadow-xl border border-slate-50">
+                        <img id="qr-image" src="" alt="QR" class="w-48 h-48">
                     </div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total to Pay</p>
-                    <div class="text-5xl font-black text-slate-900 tracking-tighter flex justify-center items-start pt-2">
-                        <span class="text-2xl mt-1 mr-1 text-slate-400">₹</span>
-                        <span id="display-amount">0</span>
-                    </div>
-                    <div class="text-sm font-bold text-slate-500 mt-2">
-                        For <span id="display-volume">0 Litres</span> of Water
-                    </div>
+                    <p class="text-sm font-medium text-slate-500">Scan QR code using any UPI App</p>
                 </div>
 
-                <!-- QR Content -->
-                <div id="qr-content" class="hidden-section space-y-6 flex flex-col items-center">
-                    <div class="bg-white p-5 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-slate-100 relative group">
-                        <img id="qr-image" src="" alt="UPI QR" class="w-52 h-52 mix-blend-multiply">
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <div class="bg-white p-2 rounded-xl shadow-lg border border-slate-50 group-hover:scale-110 transition-transform">
-                                <i data-lucide="droplet" class="w-6 h-6 text-blue-500 fill-blue-500"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 text-slate-600 text-sm bg-slate-50 p-4 rounded-2xl w-full border border-slate-100 font-medium">
-                        <div class="bg-blue-500 p-1 rounded-lg text-white">
-                            <i data-lucide="scan" class="w-4 h-4"></i>
-                        </div>
-                        <p>Open your camera or any UPI app to scan this code.</p>
-                    </div>
-                </div>
-
-                <!-- App Content -->
-                <div id="app-content" class="hidden-section space-y-5">
-                    <a id="upi-deeplink" href="#" class="flex items-center justify-center gap-3 w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-lg shadow-[0_8px_25px_rgba(15,23,42,0.3)] active:scale-[0.98] transition-all">
-                        <i data-lucide="zap" class="w-5 h-5 fill-current"></i>
-                        Pay with UPI App
+                <div id="app-content" class="hidden-section space-y-4">
+                    <a id="upi-deeplink" href="#" class="flex items-center justify-center gap-3 w-full bg-slate-900 text-white py-5 rounded-2xl font-bold text-lg">
+                        <i data-lucide="zap" class="w-5 h-5"></i>
+                        Open UPI App
                     </a>
-                    <div class="grid grid-cols-3 gap-2 opacity-60">
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-[10px] font-bold">GPay</div>
-                        </div>
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-[10px] font-bold">PhPe</div>
-                        </div>
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-[10px] font-bold">Paytm</div>
-                        </div>
-                    </div>
+                    <p class="text-xs text-slate-400 font-medium italic">Supports PhonePe, GPay, Paytm, etc.</p>
                 </div>
 
-                <div class="mt-8 pt-8 border-t border-slate-100 space-y-4">
-                    <p class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Already Paid?</p>
-                    <button onclick="startDispensing()" class="group w-full py-4 bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
-                        Start Water Filling
-                        <i data-lucide="play" class="w-4 h-4 fill-current group-hover:translate-x-1 transition-transform"></i>
+                <div class="mt-10 pt-8 border-t border-slate-100">
+                    <button onclick="startDispensing()" class="w-full py-4 bg-emerald-500 text-white font-bold rounded-2xl shadow-lg flex items-center justify-center gap-2">
+                        Start Refilling
+                        <i data-lucide="play" class="w-4 h-4 fill-current"></i>
                     </button>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4">Tap button after payment is successful</p>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 3: DISPENSING -->
-        <div id="dispensing-screen" class="hidden-section flex flex-col items-center justify-center py-12 space-y-10 animate-in zoom-in-95 duration-500">
-            <div class="relative flex items-center justify-center">
-                <div class="absolute inset-0 rounded-full bg-blue-400/20 animate-ping scale-[1.5]"></div>
-                <div class="bg-white p-8 rounded-full shadow-[0_0_50px_rgba(59,130,246,0.3)] relative z-10 border border-white/50 flex flex-col items-center justify-center w-52 h-52 backdrop-blur-xl">
-                    <div id="status-verifying" class="flex flex-col items-center gap-3">
-                        <i data-lucide="refresh-cw" class="w-12 h-12 text-blue-500 animate-spin"></i>
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Checking Payment</span>
-                    </div>
-                    <div id="status-filling" class="hidden-section flex flex-col items-center">
-                        <div class="relative">
-                            <i data-lucide="droplet" class="w-20 h-20 text-blue-500 fill-blue-500 animate-bounce"></i>
-                        </div>
-                        <div class="font-black text-blue-600 mt-2 text-4xl tracking-tighter"><span id="progress-text">0</span>%</div>
-                    </div>
+        <!-- DISPENSING SCREEN -->
+        <div id="dispensing-screen" class="hidden-section flex flex-col items-center py-12 space-y-10 animate-in zoom-in-95">
+            <div class="relative w-48 h-48 bg-white rounded-full flex flex-col items-center justify-center shadow-2xl border">
+                <div id="status-verifying" class="flex flex-col items-center gap-2">
+                    <i data-lucide="refresh-cw" class="w-10 h-10 text-blue-500 animate-spin"></i>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Checking...</span>
+                </div>
+                <div id="status-filling" class="hidden-section flex flex-col items-center">
+                    <i data-lucide="droplet" class="w-16 h-16 text-blue-500 fill-blue-500 animate-bounce"></i>
+                    <div class="font-black text-blue-600 text-4xl mt-2"><span id="progress-text">0</span>%</div>
                 </div>
             </div>
-
-            <div class="text-center space-y-3">
-                <h2 id="status-title" class="text-3xl font-black text-slate-900 tracking-tight">Processing...</h2>
-                <div class="bg-white/50 px-6 py-3 rounded-2xl border border-white inline-block">
-                    <p id="status-subtitle" class="text-slate-500 font-semibold leading-relaxed">Secure payment verification in progress.</p>
-                </div>
+            <div class="text-center">
+                <h2 id="status-title" class="text-2xl font-black text-slate-900">Validating Payment</h2>
+                <p id="status-subtitle" class="text-slate-500 font-medium">Please wait a moment...</p>
             </div>
-
-            <div id="progress-bar-container" class="hidden-section w-full bg-slate-200 rounded-full h-4 overflow-hidden p-1 shadow-inner">
-                <div id="progress-bar" class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full transition-all duration-300 shadow-md relative overflow-hidden" style="width: 0%">
-                    <div class="absolute inset-0 bg-white/30 w-full h-full animate-shimmer"></div>
-                </div>
+            <div id="progress-bar-container" class="hidden-section w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                <div id="progress-bar" class="bg-blue-600 h-full transition-all duration-300" style="width: 0%"></div>
             </div>
         </div>
 
-        <!-- SECTION 4: SUCCESS -->
-        <div id="success-screen" class="hidden-section flex flex-col items-center justify-center py-10 space-y-8 animate-in zoom-in-95 duration-500">
-            <div class="relative">
-                <div class="absolute inset-0 bg-emerald-400/20 blur-2xl rounded-full scale-150"></div>
-                <div class="bg-gradient-to-br from-emerald-400 to-emerald-600 text-white p-8 rounded-full relative z-10 shadow-2xl shadow-emerald-500/30">
-                    <i data-lucide="party-popper" class="w-12 h-12"></i>
-                </div>
+        <!-- SUCCESS SCREEN -->
+        <div id="success-screen" class="hidden-section flex flex-col items-center py-10 space-y-8 animate-in zoom-in-95">
+            <div class="bg-emerald-500 text-white p-8 rounded-full shadow-2xl">
+                <i data-lucide="check" class="w-12 h-12"></i>
             </div>
-            
-            <div class="text-center space-y-2">
-                <h2 class="text-4xl font-black text-slate-900 tracking-tight">Refill Complete!</h2>
-                <p class="text-slate-500 font-medium text-lg">Thank you for choosing AquaDrop.</p>
+            <div class="text-center">
+                <h2 class="text-3xl font-black text-slate-900">All Done!</h2>
+                <p class="text-slate-500 font-medium">Water filled successfully.</p>
             </div>
-
-            <div class="bg-white w-full rounded-[2rem] card-shadow border border-slate-100 overflow-hidden px-8 py-8 space-y-5 relative">
-                <div class="absolute top-0 right-0 p-4 opacity-5">
-                    <i data-lucide="receipt" class="w-20 h-20"></i>
-                </div>
-                <div class="flex justify-between items-end border-b border-dashed border-slate-200 pb-5">
-                    <div class="flex flex-col">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Paid Amount</span>
-                        <span class="font-black text-3xl text-slate-900">₹<span id="receipt-amount">0</span></span>
-                    </div>
-                    <div class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-lg text-xs font-bold border border-emerald-100">
-                        Paid via UPI
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-slate-500 font-semibold">Volume</span>
-                        <span id="receipt-volume" class="font-bold text-slate-900 bg-blue-50 px-3 py-1 rounded-lg">0 Litres</span>
-                    </div>
-                    <div class="flex justify-between items-center text-[10px]">
-                        <span class="text-slate-400 font-bold uppercase tracking-widest">Receipt ID</span>
-                        <span class="font-mono text-slate-500 font-bold bg-slate-50 px-2 py-1 rounded uppercase">AD-VND-89234</span>
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="resetApp()" class="group w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-2xl shadow-slate-900/20 active:scale-[0.98] transition-all text-lg flex items-center justify-center gap-3">
-                <i data-lucide="home" class="w-5 h-5 opacity-50"></i>
-                Back to Home
+            <button onclick="resetApp()" class="w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-lg">
+                Back to Start
             </button>
         </div>
     </main>
 
     <script>
-        // Constants
         const UPI_ID = '7048596598@fam';
-        const MERCHANT_NAME = 'Water Vending';
+        const MERCHANT_NAME = 'AquaDrop Vending';
         
-        // State
-        let selectedPlanId = null;
         let selectedAmount = 0;
         let selectedVolume = 0;
+        let keypadValue = "";
 
-        // Initialize Lucide
         lucide.createIcons();
 
         function updateStep(step) {
             const steps = [1, 2, 3];
             steps.forEach(s => {
                 const dot = document.getElementById(`step-${s}-dot`);
-                const label = document.getElementById(`step-${s}-label`);
                 const line = document.getElementById(`line-${s}`);
-                
                 if (s < step) {
-                    // Completed
-                    dot.className = "w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold transition-all shadow-lg shadow-emerald-200";
+                    dot.className = "w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold";
                     dot.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
-                    if (label) label.className = "text-[10px] font-bold text-emerald-500 uppercase tracking-tighter";
-                    if (line) line.className = "flex-1 h-[2px] bg-emerald-500 mx-2 mb-4";
                 } else if (s === step) {
-                    // Active
-                    dot.className = "w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-blue-100 transition-all shadow-lg shadow-blue-200";
+                    dot.className = "w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-blue-100";
                     dot.innerText = s;
-                    if (label) label.className = "text-[10px] font-bold text-blue-600 uppercase tracking-tighter";
-                    if (line) line.className = "flex-1 h-[2px] bg-slate-200 mx-2 mb-4";
                 } else {
-                    // Pending
-                    dot.className = "w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all";
+                    dot.className = "w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold";
                     dot.innerText = s;
-                    if (label) label.className = "text-[10px] font-bold text-slate-400 uppercase tracking-tighter";
-                    if (line) line.className = "flex-1 h-[2px] bg-slate-200 mx-2 mb-4";
                 }
             });
             lucide.createIcons();
         }
 
+        // --- Selection Logic ---
         function selectPlan(id, amount, volume) {
-            selectedPlanId = id;
             selectedAmount = amount;
             selectedVolume = volume;
 
             document.querySelectorAll('.plan-card').forEach(card => {
-                card.classList.remove('bg-gradient-to-br', 'from-blue-600', 'to-blue-500', 'text-white', 'shadow-blue-500/25', 'border-transparent', 'scale-[1.02]');
-                card.classList.add('bg-white', 'text-slate-800', 'border-slate-100');
-                
-                const iconBox = card.querySelector('.icon-box');
-                if(iconBox) {
-                    iconBox.classList.remove('bg-white/20', 'text-white');
-                    iconBox.classList.add('bg-blue-50', 'text-blue-500');
-                }
+                card.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50/50');
             });
+            document.getElementById(`plan-${id}`).classList.add('ring-2', 'ring-blue-500', 'bg-blue-50/50');
 
-            const activeCard = document.getElementById(`plan-${id}`);
-            activeCard.classList.add('bg-gradient-to-br', 'from-blue-600', 'to-blue-500', 'text-white', 'shadow-blue-500/25', 'border-transparent', 'scale-[1.02]');
-            activeCard.classList.remove('bg-white', 'text-slate-800', 'border-slate-100');
-            
-            const activeIconBox = activeCard.querySelector('.icon-box');
-            activeIconBox.classList.add('bg-white/20', 'text-white');
-            activeIconBox.classList.remove('bg-blue-50', 'text-blue-500');
-
-            document.getElementById('payment-methods').style.display = 'block';
-            document.getElementById('payment-methods').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('summary-amount').innerText = selectedAmount;
+            document.getElementById('payment-choice-container').style.display = 'block';
+            document.getElementById('payment-choice-container').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function setPaymentMethod(method) {
-            const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${selectedAmount}&cu=INR&tn=Water%20Dispense`;
+        function openManualEntry() {
+            document.getElementById('selection-screen').style.display = 'none';
+            document.getElementById('manual-screen').style.display = 'block';
+            keypadValue = "";
+            document.getElementById('custom-volume-input').value = "0";
+        }
+
+        function closeManualEntry() {
+            document.getElementById('manual-screen').style.display = 'none';
+            document.getElementById('selection-screen').style.display = 'block';
+        }
+
+        function keypadInput(val) {
+            if (val === 'clear') keypadValue = "";
+            else if (val === 'back') keypadValue = keypadValue.slice(0, -1);
+            else if (keypadValue.length < 2) keypadValue += val;
+            document.getElementById('custom-volume-input').value = keypadValue || "0";
+        }
+
+        function confirmManualVolume() {
+            let vol = parseInt(keypadValue) || 0;
+            if (vol < 1) return;
+            selectedVolume = vol;
+            selectedAmount = vol; 
             
+            document.getElementById('summary-amount').innerText = selectedAmount;
+            document.getElementById('manual-screen').style.display = 'none';
+            document.getElementById('selection-screen').style.display = 'block';
+            document.getElementById('payment-choice-container').style.display = 'block';
+            
+            // Mark the manual card as active
+            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('ring-2', 'ring-blue-500'));
+            document.getElementById('plan-manual').classList.add('ring-2', 'ring-blue-500');
+        }
+
+        // --- Payment Logic ---
+        function setPaymentMethod(method) {
+            const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${selectedAmount}&cu=INR&tn=Refill_${selectedVolume}L`;
             document.getElementById('display-amount').innerText = selectedAmount;
-            document.getElementById('display-volume').innerText = `${selectedVolume} Litre${selectedVolume > 1 ? 's' : ''}`;
             
             if (method === 'qr') {
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}&margin=10`;
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}&margin=10`;
                 document.getElementById('qr-image').src = qrUrl;
                 document.getElementById('qr-content').style.display = 'flex';
                 document.getElementById('app-content').style.display = 'none';
@@ -452,35 +374,25 @@
                 document.getElementById('status-verifying').style.display = 'none';
                 document.getElementById('status-filling').style.display = 'flex';
                 document.getElementById('progress-bar-container').style.display = 'block';
-                document.getElementById('status-title').innerText = 'Refilling Now...';
-                document.getElementById('status-subtitle').innerText = `Filling ${selectedVolume}L water. Please keep the container steady.`;
+                document.getElementById('status-title').innerText = 'Refilling...';
+                document.getElementById('status-subtitle').innerText = `Filling ${selectedVolume}L. Please hold on.`;
                 
                 let progress = 0;
-                const fillTime = Math.max(selectedVolume * 600, 3000); 
-                const intervalTime = 50;
-                const step = 100 / (fillTime / intervalTime);
-                
                 const timer = setInterval(() => {
-                    progress += step;
+                    progress += 2;
                     if (progress >= 100) {
-                        progress = 100;
                         clearInterval(timer);
                         showSuccess();
                     }
                     document.getElementById('progress-bar').style.width = `${progress}%`;
                     document.getElementById('progress-text').innerText = Math.floor(progress);
-                }, intervalTime);
-
+                }, 50);
             }, 2000);
         }
 
         function showSuccess() {
-            document.getElementById('receipt-amount').innerText = selectedAmount;
-            document.getElementById('receipt-volume').innerText = `${selectedVolume} Litres`;
-            
             document.getElementById('dispensing-screen').style.display = 'none';
             document.getElementById('success-screen').style.display = 'flex';
-            document.getElementById('step-indicator').style.display = 'none';
         }
 
         function resetApp() {
